@@ -9,6 +9,7 @@
     "preset-ja-spacing": true,
     "ja-technical-writing/ja-no-mixed-period": false,
     "ja-technical-writing/sentence-length": false,
-    "ja-technical-writing/no-exclamation-question-mark": false
+    "ja-technical-writing/no-exclamation-question-mark": false,
+    "ja-technical-writing/ja-no-successive-word": false
   }
 }
