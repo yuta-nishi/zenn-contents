@@ -9,9 +9,9 @@ published: true
 ## はじめに
 
 こんにちは、みなさんはどのメモアプリを使用していますか？
-[Notion](https://www.notion.so/)や[Evernote](https://evernote.com/)などの有名なアプリを使っている方も多いでしょう。
+[Notion](https://www.notion.so/)や[Evernote](https://evernote.com/)などの有名なアプリを使っている方も多いんじゃないでしょうか。
 
-しかし、私にとってはこれらの有名なアプリではなく、**Obsidian**がもっとも適していました。
+しかし、私の使い方ではこれらの有名なアプリではなく、**Obsidian**がもっとも適していました。
 @[card](https://obsidian.md/)
 この記事では、Obsidianについての詳細な説明は省き、私がどのようにObsidianを使用しているかをまとめます。
 
