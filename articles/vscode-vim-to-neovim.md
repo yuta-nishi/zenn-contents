@@ -47,10 +47,13 @@ VSCodeVimとVSCode Neovimの違いは[yubrotさんの記事](https://zenn.dev/yu
 
 筆者のVSCodeVim環境ではundoが壊れるということはあまりありませんでしたが、カーソルの移動がもっさりしたり、Saveが重くなったりすることがあったので、やはりVSCode Neovimよりは劣っているように感じます。
 
-特に`:h`などの主要コマンドが実装されていなかったり、コマンドの入力が分かりやすく表示されないのは我慢できませんでした。その点、VSCode Neovimはこの要件を満たしています。
+特に、以下のように`:h`などの主要コマンドが実装されていなかったり、コマンドの入力が分かりやすく表示されないのは我慢できませんでした。その点、VSCode Neovimはこの要件を満たしています。
 
-![]()
-![]()
+![VSCode Neovimの場合](/images/vscode-vim-to-neovim-1.png =500x)
+*VSCode Neovimでコマンドを打つと上部に表示され、見やすい*
+
+![VSCodeVimの場合](/images/vscode-vim-to-neovim-2.png =500x)
+*VSCodeVimでコマンドを打つと下部に表示され、対応していないコマンドもある*
 
 ## VSCodeVimの設定
 
@@ -414,10 +417,6 @@ Neovim移行で詰まったところは以下の3点です。
 ```lua:options.luaの抜粋
 vim.opt.clipboard = "unnamedplus"
 ```
-
-:::message
-unnamedとunnamedplusの違い
-:::
 
 ## 解決できなかったこと
 
