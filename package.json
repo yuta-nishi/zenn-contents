@@ -8,7 +8,7 @@
     "lint:spell": "cspell '**/*.md'"
   },
   "dependencies": {
-    "zenn-cli": "^0.1.150"
+    "zenn-cli": "^0.1.151"
   },
   "devDependencies": {
     "cspell": "^8.3.2",
