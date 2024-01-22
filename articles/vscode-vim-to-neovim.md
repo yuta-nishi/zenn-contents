@@ -3,7 +3,7 @@ title: "VSCodeVimからVSCode Neovimに移行したのでメモ"
 emoji: "📝"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: [Vim, Neovim, VSCode]
-published: false
+published: true
 ---
 
 ## はじめに
@@ -31,7 +31,7 @@ keymapsとoptionsを設定します。
 
 ## なぜ移行を考えたか
 
-まず、筆者のVim歴は**1年弱程度**です。普段からVimエディタは使用せず、VSCodeVimを用いてVS Codeでコーディングをしています。
+まず、筆者のVim歴は**10か月程度**です。普段からVimエディタは使用せず、VSCodeVimを用いてVS Codeでコーディングをしています。
 
 ただ、`.`での繰り返しや`:`を用いたコマンドを使いこなせておらず、Vimをちゃんと勉強したいなと思い、最近になって[crafzdogさんの設定](https://www.devas.life/effective-neovim-setup-for-web-development-towards-2024/)を参考にLazyVimを用いた[Neovim](https://neovim.io/)の環境を整えて少し触っていました。
 
@@ -386,7 +386,7 @@ Neovim移行で詰まったところは以下の3点です。
 
 ### SpaceをLeaderに割り当てられない
 
-`options.lua`に`vim.g.mapleader = " "`を設定しているのでSpaceがLeaderに割り当てられています。しかし、VSCode NeovimではLeaderを用いた操作が想定されていないようでVSCodeVimのような操作はできませんでした。
+`options.lua`に`vim.g.mapleader = " "`を設定しているのでSpaceがLeaderに割り当てられています。しかし、VSCode NeovimではLeaderを用いた操作が想定されていないようでこの設定は反映されませんでした。
 
 仕方ないので、Spaceを用いたVS Codeの操作は`keybindings.json`で設定して解決しました。
 
@@ -412,7 +412,7 @@ Neovim移行で詰まったところは以下の3点です。
 ### yankがclipboardにコピーされない
 
 元々のLazyVimではカスタムの設定を追加しなくてもyankがclipboardにコピーされていました。
-多分LazyVim側の設定でそうなっていたので、VSCode Neovimでもコピーされるように`options.lua`で明示的に設定しました。
+多分LazyVimのデフォルトの設定でそうなっていたので、VSCode Neovimでもコピーされるように`options.lua`で明示的に設定しました。
 
 ```lua:options.luaの抜粋
 vim.opt.clipboard = "unnamedplus"
@@ -420,9 +420,9 @@ vim.opt.clipboard = "unnamedplus"
 
 ## 解決できなかったこと
 
-VSCode NeovimはLeaderの設定が反映されなかったので、下記のようなLeaderを用いたカスタムキーバインドが適用できませんでした。**もしわかる方がいらっしゃれば、コメントしていただけると嬉しいです。**
+VSCode NeovimはLeaderの設定が反映されなかったので、下記のようにVS Codeの機能ではないLeaderを用いたカスタムキーバインドが適用できませんでした。**もしわかる方がいらっしゃれば、コメントしていただけると嬉しいです。**
 
-ただ、普段からあまり使わない設定ばかりなのでダメージは0です。
+ただ、普段からあまり使わない設定ばかりだったので、ダメージは0です。
 
 ```json:settings.jsonの抜粋
     {
@@ -438,5 +438,5 @@ VSCode NeovimはLeaderの設定が反映されなかったので、下記のよ�
 
 ## さいごに
 
-VSCode Neovimに移行してからまだ1日しか経っていませんが、挙動のもっさり感もなくなり、普段使いのコマンドはすべて使えるので大満足です。
-私はVimライト層なので、VS Codeで使う場合はプラグインを入れる運用をしないつもりですが、色々とカスタマイズのしがいがありそうで良い拡張機能だと思いました。
+VSCode Neovimに移行してからまだ2日しか経っていませんが、挙動のもっさり感もなくなり、普段使いのコマンドはすべて使えるので大満足です。
+私はライトVimmerなので、VS Codeで使う場合はプラグインを入れる運用をしないつもりですが、色々とカスタマイズのしがいがありそうで良い拡張機能だと思いました。
