@@ -364,24 +364,21 @@ Neovim移行で詰まったところは以下の3点です。
 
 ### insert mode mappingが反映されない
 
-`keymaps.lua`の設定を先述しましたが、VSCode Neovimではinsert modeに対するカスタムマッピング設定は適用できません。[公式ドキュメント](https://github.com/vscode-neovim/vscode-neovim?tab=readme-ov-file#composite-escape-keys)の通りに`keybindings.json`を設定して解決しました。
+`keymaps.lua`の設定を先述しましたが、VSCode Neovimではinsert modeに対するカスタムマッピング設定は適用できません。公式ドキュメントの通りに`settings.json`を設定して解決しました。
 
+:::message alert
+元々、`keybindings.json`に設定を記載していましたが、V1.11.0から`settings.json`に記載するように変更されました。
+:::
+
+@[card](https://github.com/vscode-neovim/vscode-neovim/pull/1917)
 @[card](https://github.com/vscode-neovim/vscode-neovim?tab=readme-ov-file#composite-escape-keys)
 
-```json:keybindings.jsonの抜粋
-  /* Neovim Settings */
-  {
-    "key": "j",
-    "command": "vscode-neovim.compositeEscape1",
-    "when": "neovim.mode == insert && editorTextFocus",
-    "args": "j"
+```json:settings.jsonの抜粋
+  "vscode-neovim.compositeKeys": {
+    "jk": {
+      "command": "vscode-neovim.escape",
+    }
   },
-  {
-    "key": "k",
-    "command": "vscode-neovim.compositeEscape2",
-    "when": "neovim.mode == insert && editorTextFocus",
-    "args": "k"
-  }
 ```
 
 ### SpaceをLeaderに割り当てられない
@@ -391,7 +388,6 @@ Neovim移行で詰まったところは以下の3点です。
 仕方ないので、Spaceを用いたVS Codeの操作は`keybindings.json`で設定して解決しました。
 
 ```json:keybindings.jsonの抜粋
-  /* Neovim Settings */
   {
     "key": "space s",
     "command": "workbench.action.files.save",
