@@ -8,36 +8,26 @@ published: true
 
 ## はじめに
 
-こんにちは、今回は[VSCodeVim](https://marketplace.visualstudio.com/items?itemName=vscodevim.vim)から[VSCode Neovim](https://marketplace.visualstudio.com/items?itemName=asvetliakov.vscode-neovim)に移行したので、それに関するメモをまとめて記事にしています。
+こんにちは、[VSCodeVim](https://marketplace.visualstudio.com/items?itemName=vscodevim.vim)から[VSCode Neovim](https://marketplace.visualstudio.com/items?itemName=asvetliakov.vscode-neovim)に移行したので、それに関するメモをまとめました。
 
 Neovimの環境は[LazyVim](https://github.com/LazyVim/LazyVim)を使用しています。その他のプラグインを使用している場合は適宜読み替えてください。
 
 @[card](https://marketplace.visualstudio.com/items?itemName=vscodevim.vim)
 @[card](https://marketplace.visualstudio.com/items?itemName=asvetliakov.vscode-neovim)
 
-:::message alert
-VimのプラグインをVS Codeで使えるようにする設定はしていません。
-keymapsとoptionsを設定します。
-:::
-
 :::message
-全体の設定は私の[dotfiles](https://github.com/yuta-nishi/dotfiles/tree/main)を参照してください。
+全体の設定は私の[dotfiles](https://github.com/yuta-nishi/dotfiles)を参照してください。
 :::
-
-## この記事の主な対象読者
-
-- VSCodeVimを使っている方
-- VSCode Neovimに興味がある方
 
 ## なぜ移行を考えたか
 
-まず、筆者のVim歴は**10か月程度**です。普段からVimエディタは使用せず、VSCodeVimを用いてVS Codeでコーディングをしています。
+普段からVimエディタは使用せず、VSCodeVimを用いてVS Codeでコーディングをしました。
 
 ただ、`.`での繰り返しや`:`を用いたコマンドを使いこなせておらず、Vimをちゃんと勉強したいなと思い、最近になって[crafzdogさんの設定](https://www.devas.life/effective-neovim-setup-for-web-development-towards-2024/)を参考にLazyVimを用いた[Neovim](https://neovim.io/)の環境を整えて少し触っていました。
 
 @[card](https://www.devas.life/effective-neovim-setup-for-web-development-towards-2024/)
 
-結局、Copilot ChatやRemote SSHなどの有用な拡張機能が手放せないのでVS Codeを利用することにしたのですが、Neovimを触ったことでVSCodeVimが使いづらいと感じたため、VSCode Neovimに移行することを考えました。
+結局、GitHub Copilot ChatやRemote SSHなどの有用な拡張機能が手放せないのでVS Codeを利用することにしたのですが、Neovimを触ったことでVSCodeVimのもっさり感が気になったため、VSCode Neovimに移行することを考えました。
 
 ## 移行するメリット
 
@@ -45,9 +35,9 @@ VSCodeVimとVSCode Neovimの違いは[yubrotさんの記事](https://zenn.dev/yu
 
 @[card](https://zenn.dev/yubrot/articles/1bf4b8d79d7cae)
 
-筆者のVSCodeVim環境ではundoが壊れるということはあまりありませんでしたが、カーソルの移動がもっさりしたり、Saveが重くなったりすることがあったので、やはりVSCode Neovimよりは劣っているように感じます。
+筆者のVSCodeVim環境ではundoが壊れるということはありませんでしたが、カーソルの移動がもっさりしたり、Saveが重くなったりすることがあったので、やはりVSCode Neovimよりは劣っているように感じます。
 
-特に、以下のように`:h`などの主要コマンドが実装されていなかったり、コマンドの入力が分かりやすく表示されないのは我慢できませんでした。その点、VSCode Neovimはこの要件を満たしています。
+特に、以下のように`:h`などの主要コマンドが実装されていなかったり、コマンドの入力が分かりやすく表示されないのは我慢できませんでした。その点、VSCode Neovimはきちんと動作します。
 
 ![VSCode Neovimの場合](/images/vscode-vim-to-neovim-1.png =500x)
 *VSCode Neovimでコマンドを打つと上部に表示され、見やすい*
@@ -58,6 +48,7 @@ VSCodeVimとVSCode Neovimの違いは[yubrotさんの記事](https://zenn.dev/yu
 ## VSCodeVimの設定
 
 VSCodeVimは以下のように設定していました。
+少し長いです。
 
 ```json:settings.json
 /* Vim Settings */
@@ -281,10 +272,9 @@ VSCodeVimは以下のように設定していました。
 
 ### `settings.json`
 
-VSCode NeovimはローカルのNeovimと設定ファイルを以下のように設定して読み込ませます。
+VSCode NeovimはローカルのNeovimと設定ファイルを以下のように設定して読み込みます。
 
 ```json:settings.json
-  /* NeoVim Settings */
   "vscode-neovim.neovimExecutablePaths.darwin": "/opt/homebrew/bin/nvim",
   "vscode-neovim.neovimInitVimPaths.darwin": "/Users/yutanishi/.config/nvim/init.lua",
 ```
@@ -294,19 +284,101 @@ VSCode NeovimはローカルのNeovimと設定ファイルを以下のように�
 pathに指定した`init.lua`は以下のように設定しています。
 
 ```lua:init.lua
-if vim.g.vscode then
+require("config.lazy")
+```
+
+### `lazy.lua`
+
+`lazy.lua`での条件分岐は以下のように設定しています。
+
+```lua:lazy.luaの抜粋
+-- Set up lazy.nvim
+if not vim.g.vscode then
+  require("lazy").setup({
+    spec = {
+      -- LazyVim core plugins
+      {
+        "LazyVim/LazyVim",
+        import = "lazyvim.plugins",
+        opts = {
+          colorscheme = "everforest",
+          news = { lazyvim = true, neovim = true },
+        },
+      },
+
+      -- Import extra modules
+      { import = "lazyvim.plugins.extras.linting.eslint" },
+      { import = "lazyvim.plugins.extras.formatting.prettier" },
+      { import = "lazyvim.plugins.extras.lang.typescript" },
+      { import = "lazyvim.plugins.extras.lang.json" },
+      { import = "lazyvim.plugins.extras.lang.rust" },
+      { import = "lazyvim.plugins.extras.coding.copilot" },
+      { import = "lazyvim.plugins.extras.util.mini-hipatterns" },
+      { import = "plugins" },
+    },
+
+    defaults = {
+      -- Don't lazy-load custom plugins by default
+      lazy = false,
+      -- Use the latest git commit
+      version = false,
+    },
+
+    checker = {
+      -- Automatically check for plugin updates
+      enabled = true,
+    },
+
+    performance = {
+      cache = {
+        -- Enable caching for all plugins
+        enabled = true,
+      },
+      rtp = {
+        -- Disable some rtp plugins
+        disabled_plugins = {
+          "gzip",
+          "netrwPlugin",
+          "rplugin",
+          "tarPlugin",
+          "tohtml",
+          "tutor",
+          "zipPlugin",
+        },
+      },
+    },
+
+    debug = false,
+  })
+else
   require("config.keymaps")
   require("config.options")
-else
-  require("config.lazy")
+  require("lazy").setup({
+    -- Surround plugin
+    {
+      "kylechui/nvim-surround",
+      version = "*", -- Use for stability; omit to use `main` branch for the latest features
+      event = "VeryLazy",
+      config = function()
+        require("nvim-surround").setup({
+          -- Configuration here, or leave empty to use defaults
+        })
+      end
+    }
+  })
 end
 ```
 
-`vim.g.vscode`でVSCode Neovimを使用する場合の判定をしています。
-`keymaps`と`options`のみを反映させたいので上記のようにしています。
+`vim.g.vscode`でVSCode Neovimを使用する場合の判定をしています。`lazy.nvim`と`packer.nvim`ではデフォルトで提供されているので楽です。
+
+`keymaps`と`options`を有効にしています。
+プラグインは`nvim-surround`だけ入れています。
+
+参考：
+@[card](https://github.com/vscode-neovim/vscode-neovim?tab=readme-ov-file#neovim-configuration)
 
 :::message
-LazyVimの場合、ディレクトリ構成は以下になります。
+自分のディレクトリ構成は以下です。
 
 - init.lua
 - lua
@@ -334,10 +406,6 @@ keymap.set("i", "jk", "<ESC>", opts)
 -- Normal mode mappings
 keymap.set("n", "<C-h>", "^", opts)
 keymap.set("n", "<C-l>", "$", opts)
-
--- Inc/Dec settings
-keymap.set("n", "+", "<C-a>", opts)
-keymap.set("n", "-", "<C-x>", opts)
 
 -- To avoid easymotion
 keymap.set("n", "s", '"_s', opts)
@@ -434,5 +502,5 @@ VSCode NeovimはLeaderの設定が反映されなかったので、下記のよ�
 
 ## さいごに
 
-VSCode Neovimに移行してからまだ2日しか経っていませんが、挙動のもっさり感もなくなり、普段使いのコマンドはすべて使えるので大満足です。
-私はライトVimmerなので、VS Codeで使う場合はプラグインを入れる運用をしないつもりですが、色々とカスタマイズのしがいがありそうで良い拡張機能だと思いました。
+VSCode Neovimに移行して快適にコーディングができています。満足です。
+Neovimの操作感が欲しいけど、プラグインの管理が面倒くさいという方におすすめです。
