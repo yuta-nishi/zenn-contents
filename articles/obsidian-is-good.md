@@ -35,7 +35,7 @@ Obsidianを使いたい方は[**Obsidianでつなげる情報管理術【完成�
 - ランチャーツールとして[Raycast](https://www.raycast.com/)を使用しており、ホットキーでアプリを移動しているため、機能単位でアプリを分けると移動が楽だから
 - 作る側の人間として色々なアプリを触った方が良いし、どのような機能があるのか興味があったから
 
-基本的にはVS Codeのメモ環境に満足していましたが、専用アプリを使うことでさらに良くなるのではないかという好奇心から移行することにしました。結果として、期待以上に使いやすくなりました。
+基本的にはVS Codeのメモ環境に満足していましたが、専用アプリを使うことでさらに良くなるのではという好奇心から移行することにしました。結果として、期待以上に使いやすくなりました。
 
 ### 移行するメモアプリに対する要件
 
@@ -181,15 +181,13 @@ alias、tag、created、updatedのフロントマターの自動生成・自動�
 
 @[card](https://github.com/Quorafind/Obsidian-Memos)
 「## メモ」以下に記述するように設定しています。基本的にチェックボックス
-を用いて、タスクを細分化しています。かかった時間が見積もれるのが良いです。
-
-参考：
-@[card](https://hatobato.com/Publish/Cards/Obsidian-memos)
+を用いて、タスクを細分化しています。かかった時間が見積もれて良いです。
+参考： @[card](https://hatobato.com/Publish/Cards/Obsidian-memos)
 
 ### TagFolder ★★️
 
 @[card](https://github.com/vrtmrz/obsidian-tagfolder)
-あまり使う機会はありませんが、tagの順番によらずにフォルダのように振る舞ってくれるのでファイル間の関係がわかりやすいです。
+あまり使う機会はありませんが、tagの順番によらずフォルダのように振る舞ってくれるのでファイル間の関係がわかりやすいです。
 
 参考：
 @[card](https://pouhon.net/obsidian-tagfolder/7552/)
@@ -227,7 +225,6 @@ alias、tag、created、updatedのフロントマターの自動生成・自動�
 ### デイリーノート
 
 デイリーノートの**テンプレート**がこんな感じです。
-
 @[gist](https://gist.github.com/yuta-nishi/2a3ddd2b3a7958459d9ef9fe0a90621a?file=dairy-note.md)
 
 #### フロントマター

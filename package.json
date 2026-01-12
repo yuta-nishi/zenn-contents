@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "lint:text": "textlint '**/*.md'",
-    "lint:text:fix": "textlint --fix '**/*.md'",
+    "lint:text": "textlint --ignore-path .gitignore '**/*.md'",
+    "lint:text:fix": "textlint --fix --ignore-path .gitignore '**/*.md'",
     "lint:md": "markdownlint-cli2 '**/*.md'",
     "lint:md:fix": "markdownlint-cli2 --fix '**/*.md'",
-    "lint": "pnpm lint:text && pnpm lint:md && pnpm lint:spell",
+    "lint": "pnpm lint:text && pnpm lint:md",
     "lint:fix": "pnpm lint:text:fix && pnpm lint:md:fix"
   },
   "devDependencies": {

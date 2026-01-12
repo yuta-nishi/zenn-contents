@@ -390,6 +390,7 @@ end
   - plugins
     - colorscheme.lua
     - ...
+
 :::
 
 ### `keymaps.lua`
@@ -484,7 +485,7 @@ vim.opt.clipboard = "unnamedplus"
 
 ## 解決できなかったこと
 
-VSCode NeovimはLeaderの設定が反映されなかったので、下記のようにVS Codeの機能ではないLeaderを用いたカスタムキーバインドが適用できませんでした。**もしわかる方がいらっしゃれば、コメントしていただけると嬉しいです。**
+VSCode NeovimはLeaderの設定が反映されなかったので、下記のようにVS Codeの機能ではないLeaderを用いたカスタムキーバインドが適用できませんでした。
 
 ただ、普段からあまり使わない設定ばかりだったので、ダメージは0です。
 
